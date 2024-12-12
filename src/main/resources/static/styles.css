@@ -1,0 +1,53 @@
+/* Set the background to the provided GIF */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+    background: url('https://www.adventurebikerider.com/wp-content/uploads/2017/10/tumblr_o27c7fByaO1tchrkco1_500.gif') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* Style the heading */
+h1 {
+    margin-top: 50px;
+    font-size: 4em;
+    text-shadow: 2px 2px 5px black;
+}
+
+/* Style the form */
+form {
+    margin: 20px auto;
+    text-align: center;
+}
+
+input[type="text"], button {
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5em;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Style the weather details section */
+#weatherDetails {
+    margin-top: 20px;
+    font-size: 1.5em;
+    text-shadow: 1px 1px 3px black;
+}
+
+.hidden {
+    display: none;
+}

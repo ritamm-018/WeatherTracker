@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>WEATHER INFORMATION</h1>
+<form id="weatherForm">
+    <label for="city">Enter City Name:</label>
+    <input type="text" id="city" name="city" placeholder="City Name" required>
+    <button type="submit">Get Weather</button>
+</form>
+
+<div id="weatherDetails" class="hidden">
+    <h2>Weather Details</h2>
+    <p><strong>City:</strong> <span id="cityName"></span></p>
+    <p><strong>Temperature:</strong> <span id="temperature"></span></p>
+    <p><strong>Condition:</strong> <span id="condition"></span></p>
+    <p><strong>Wind Speed:</strong> <span id="windSpeed"></span></p>
+</div>
+
+<script>
+    // Wait for the DOM to fully load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Reference the form element
+        const form = document.getElementById('weatherForm');
+
+        // Add a submit event listener
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission and page reload
+
+            // Get the city name entered by the user
+            const city = document.getElementById('city').value.trim();
+
+            if (city) {
+                // Fetch weather data from the backend API
+                fetch(`/weather?city=${city}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch weather data');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Populate the weather details on the page
+                        document.getElementById('cityName').textContent = data.city;
+                        document.getElementById('temperature').textContent = data.temperature;
+                        document.getElementById('condition').textContent = data.condition;
+                        document.getElementById('windSpeed').textContent = data.windSpeed;
+
+                        // Display the weather details section
+                        document.getElementById('weatherDetails').classList.remove('hidden');
+                    })
+                    .catch(error => {
+                        // Display an error message
+                        alert('Error fetching weather data. Please try again.');
+                        console.error(error);
+                    });
+            } else {
+                // Show an alert if the input is empty
+                alert('Please enter a valid city name.');
+            }
+        });
+    });
+</script>
+</body>
+</html>
